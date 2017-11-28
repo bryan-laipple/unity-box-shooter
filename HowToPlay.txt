@@ -1,0 +1,41 @@
+Mission: Shoot targets to advance through Red Level.
+
+Game Over: Time remaining or ammo reach 0.  Play again always takes you back to beginning.
+
+Target Descriptions:
+Green Boxes increase score
+Green Spheres increase ammo
+Yellow Boxes decrease time
+Yellow Spheres decrease ammo
+White Boxes increase time
+
+Level Goals:
+Aqua Level: 50 pts
+Blue Level: 150 pts
+Green Level: 250 pts
+Purple Level: Bonus level 
+Yellow Level: 300 pts
+Red Level: 350 pts
+
+Strategy:
+Aqua Level: Try to beat with > 30 seconds remaining.
+Blue Level: Try to beat with > 30 seconds remaining.
+Green Level: Be careful limited ammo introduced.
+Purple Level: Try to up your ammo to ~100 before timer runs out.
+Yellow Level: No more help.  Time is of the essence, need to save some for next level.
+Red Level: Good luck!
+
+How to Play:
+Mouse controls aim.
+Fire with space bar or left mouse.
+Up Down Left Right (W, S, A, D) move player.
+Shoot floating Play Again text to start over.
+Shoot Next Level text to advance to the next level.
+
+Updates:
+UI has ammunition level above cross-hair.
+New ammoUp and ammoDown targets.
+Score, time remaining, and ammo stay with player between levels.
+GameManager.cs sets the level color, includes logic for ammunition level, refactored to get rid of public static reference (other scripts now use static methods).
+SpawnGameObjects.cs updated so designer can more easily control how likely an object (target) is spawned.
+
