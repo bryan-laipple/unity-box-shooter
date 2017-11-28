@@ -1,0 +1,69 @@
+Notes for uploading to AWS S3:
+-----------------------------
+- Build for WebGL
+- Rename the *gz files in Release folder to *.gz (e.g. xxx.jsgz -> xxx.js.gz)
+- Update the url props of Module var in index.html to correspond to *.gz (e.g. dataUrl: "Release/xxx.data.gz")
+- Update index.html to include instructions modal
+- aws --profile ${profile} s3 sync . s3://${bucket} --exclude "*.gz" --delete --dryrun
+- aws --profile ${profile} s3 sync . s3://${bucket} --exclude "*" --include "*.gz" --content-encoding "gzip" --delete --dryrun
+
+Notes on adding instructions:
+-----------------------------
+- Add the jquery modal scripts near the end of the <head> tag
+    <!-- Modal provided by http://jquerymodal.com/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+
+- Add the following div after <div class="title">
+  <div class="title popup-link"><a href="#instructions" rel="modal:open">Instructions</a></div>
+
+- Add the following div after the footer <p>
+  <div id="instructions" class="modal">
+
+        <p><span class="heading">How to Play</span><br/>
+            Click web-player to gain control of game<br/>
+            Press Esc to exit<br/>
+            Mouse controls aim<br/>
+            Fire with space bar or mouse<br/>
+            Up Down Left Right (W, S, A, D) move player<br/>
+            Shoot floating "Play Again" text to start over<br/>
+            Shoot "Next Level" text to advance to the next level</p>
+
+        <p><span class="heading">Mission</span><br/>
+            Shoot targets to advance through Red Level</p>
+
+        <p><span class="heading">Game Over</span><br/>
+            Time remaining or ammo reach 0<br/>
+            Play again always takes you back to beginning</p>
+
+        <p><span class="heading">Target Descriptions</span><br/>
+            Green Boxes increase score<br/>
+            Green Spheres increase ammo<br/>
+            Yellow Boxes decrease time<br/>
+            Yellow Spheres decrease ammo<br/>
+            White Boxes increase time</p>
+
+        <p><span class="heading">Level Goals</span><br/>
+            Aqua Level: 50 pts<br/>
+            Blue Level: 150 pts<br/>
+            Green Level: 250 pts<br/>
+            Purple Level: Bonus level<br/>
+            Yellow Level: 300 pts<br/>
+            Red Level: 350 pts</p>
+
+        <p><span class="heading">Strategy Hints</span><br/>
+            Aqua Level: Advance with > 30 seconds remaining<br/>
+            Blue Level: Advance with > 30 seconds remaining<br/>
+            Green Level: Be careful limited ammo introduced<br/>
+            Purple Level: Up your ammo to ~100 before timer runs out<br/>
+            Yellow Level: No more help.  Time is of the essence, need to save some for next level<br/>
+            Red Level: Good luck!</p>
+
+        <a href="#" rel="modal:close">Close</a>
+    </div>
+
+- Add the following to TemplateData/style.css
+  div.popup-link a { color: #333; font-size: 14px; }
+  div#instructions .heading { font-weight: bold; }
+
